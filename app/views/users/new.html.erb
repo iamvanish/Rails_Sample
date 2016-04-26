@@ -1,4 +1,3 @@
-
 <% provide(:title,'Sign up') %>
 <h1>注册</h1>
 <div class="row">
@@ -14,7 +13,7 @@
             <%= f.email_field :email, class:'form-control' %>
             
             <%= f.label :password %>
-            <%= f.password_field :password %>
+            <%= f.password_field :password, class:'form-control' %>
             
             <%= f.label :password_confirmation,"Confirmation" %>
             <%= f.password_field :password_confirmation, class:'form-control' %>
