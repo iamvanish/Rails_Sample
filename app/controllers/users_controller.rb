@@ -16,17 +16,16 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      log_in @user
-      flash[:success] = "欢迎注册新用户"
-      redirect_to @user
-    else
-      render 'new'
-    end
-    
-  end
+  def create 
+    @user = User.new(user_params) 
+    if @user.save 
+      @user.send_activation_email
+      flash[:info] = "请查看邮件激活账户" 
+      redirect_to root_url 
+    else 
+      render 'new' 
+    end 
+  end 
   
   def edit
     @user = User.find(params[:id])
@@ -43,12 +42,10 @@ class UsersController < ApplicationController
   end
   
   def destroy 
-    User.find(params[:id]).destroy 
-    flash[:success] = "删除成功" 
-    redirect_to users_url 
+    log_out if logged_in? 
+    redirect_to root_url  
   end 
 
-  
   
   private
   
